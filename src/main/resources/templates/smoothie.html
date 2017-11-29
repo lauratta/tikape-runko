@@ -13,6 +13,9 @@
             <li th:each="smoothieIngredient: ${smoothieIngredients}">
                 <p><span th:text="${smoothieIngredient.raakaAine.nimi}">raakaAine</span>, 
                 <span th:text="${smoothieIngredient.maara}">maara</span> </p>
+                <form th:action="@{~/smoothiet/{id}(id=${smoothieIngredient.id})}" method="post">
+                    <input type="submit" value="Poista"/>
+                </form>
             </li>
         </ol>
 

@@ -110,7 +110,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public List<AnnosRaakaAine> findAllForAnnosKey(Integer key) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ? ORDER BY jarjestys ASC");
         stmt.setObject(1, key);
         
 
@@ -142,7 +142,12 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        // ei toteutettu
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM AnnosRaakaAine WHERE id = ?");
+        stmt.setInt(1, key);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
     }
     
 }

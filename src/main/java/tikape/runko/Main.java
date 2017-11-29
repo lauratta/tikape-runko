@@ -50,6 +50,13 @@ public class Main {
             return new ModelAndView(map, "smoothie");
         }, new ThymeleafTemplateEngine());
         
+        post("/smoothiet/:id", (req, res) -> {
+            Integer smoothieIngredientId = Integer.parseInt(req.params(":id"));
+            annosRaakaAineDao.delete(smoothieIngredientId);
+            res.redirect("/smoothiet");
+            return "";
+        });
+        
         get("/smoothiet_new", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("smoothiet", annosDao.findAll());
@@ -93,22 +100,18 @@ public class Main {
             return "";
         });
         
-        post("/smoothiet_new/2", (req, res) -> {
-            int haettavaAnnos = Integer.parseInt(req.queryParams("smoothieId"));
-            Annos a = annosDao.findOne(haettavaAnnos);
-            System.out.println("Annos_id: " + haettavaAnnos);
+        post("/smoothiet_new/new/2", (req, res) -> {
             
-            int haettavaRaakaAine = Integer.parseInt(req.queryParams("ingredientId"));
-            RaakaAine ra = raakaAineDao.findOne(haettavaRaakaAine);
-            System.out.println("Ra_id: " + haettavaRaakaAine);
-            
+            Annos a = annosDao.findOne(Integer.parseInt(req.queryParams("smoothieId")));
+            RaakaAine ra = raakaAineDao.findOne(Integer.parseInt(req.queryParams("ingredientId")));
             int jarjestys = Integer.parseInt(req.queryParams("order"));
-            
-            AnnosRaakaAine ara = new AnnosRaakaAine(-1, ra, a, jarjestys, req.queryParams("quantity"), req.queryParams("instructions"));
-            
+            String maara = req.queryParams("quantity");
+            String ohje = req.queryParams("instructions");
+            AnnosRaakaAine ara = new AnnosRaakaAine(-1,ra, a, jarjestys, maara, ohje);
             annosRaakaAineDao.saveAnnosRaakaAine(ara);
             res.redirect("/smoothiet_new");
             return "";
+            
         });
         
         

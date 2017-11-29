@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Smoothiet</title>
         <meta charset="utf-8" />
     </head>
 
@@ -29,39 +29,26 @@
             <input type="submit" value="Lisää"/>
         </form>
         
-        <h2>Lisää raaka-aineita</h2>
+        <h2>Päivitä smoothieohjeita</h2>
         
-        
-        
-        
-        
-        
-        <form method="POST" action="/smoothiet_new/2">
-            <p>Smoothien nimi:</p>
-        
+        <p>Valitse smoothie ja ainesosa ja lisää ohjeet:</p>
+        <form method="POST" action="/smoothiet_new/new/2">
             <select name="smoothieId">
-                <option th:each="smoothie: ${smoothiet}" th:value="${smoothie.id}" th:text="${smoothie.nimi}">
+            <option th:each="smoothie: ${smoothiet}" th:value="${smoothie.id}" th:text="${smoothie.nimi}">
                 smoothie
-                </option>
-             </select>
-            
-            <p>Lisättävä raaka-aine:</p>
-        
+            </option>
+            </select>  
             <select name="ingredientId">
-                <option th:each="ingredient: ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.nimi}">
-                raaka_aine
-                </option>
+            <option th:each="ingredient: ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.nimi}">
+                raaka-aine
+            </option>
             </select>
-            
             <p>Järjestys</p>
             <input type="text" name="order"/><br/>
-            
             <p>Määrä</p>
             <input type="text" name="quantity"/><br/>
-            
             <p>Ohje</p>
             <input type="text" name="instructions"/><br/>
-            
             <input type="submit" value="Lisää"/>
         </form>
         
