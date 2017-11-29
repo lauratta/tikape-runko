@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Otsikko</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Tee hei itsellesi <span th:text="${smoothie.nimi}">smoothie</span> näin !</h1>
+        
+        <ol>
+            <li th:each="smoothieIngredient: ${smoothieIngredients}">
+                <p><span th:text="${smoothieIngredient.raakaAine.nimi}">raakaAine</span>, 
+                <span th:text="${smoothieIngredient.maara}">maara</span> </p>
+            </li>
+        </ol>
+
+        <p><a href="/smoothiet">Smoothielistaukseen.</a></p>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Otsikko</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Smoothiet</h1>
+
+        <ol>
+            <li th:each="smoothie: ${smoothiet}">
+                <a th:href="${'/smoothiet/' + smoothie.id}">
+                    <span th:text="${smoothie.nimi}">smoothien nimi</span>
+                </a>
+                <form th:action="@{~/smoothiet_new/{id}(id=${smoothie.id})}" method="post">
+                    <input type="submit" value="Poista"/>
+                </form> 
+                
+            </li>
+        </ol>  
+        
+        <h2>Lisää uusi</h2>
+        
+        <p>Smoothien nimi:</p>
+        <form method="POST" action="/smoothiet_new">
+            <input type="text" name="name"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+        
+        <h2>Lisää raaka-aineita</h2>
+        
+        
+        
+        
+        
+        
+        <form method="POST" action="/smoothiet_new/2">
+            <p>Smoothien nimi:</p>
+        
+            <select name="smoothieId">
+                <option th:each="smoothie: ${smoothiet}" th:value="${smoothie.id}" th:text="${smoothie.nimi}">
+                smoothie
+                </option>
+             </select>
+            
+            <p>Lisättävä raaka-aine:</p>
+        
+            <select name="ingredientId">
+                <option th:each="ingredient: ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.nimi}">
+                raaka_aine
+                </option>
+            </select>
+            
+            <p>Järjestys</p>
+            <input type="text" name="order"/><br/>
+            
+            <p>Määrä</p>
+            <input type="text" name="quantity"/><br/>
+            
+            <p>Ohje</p>
+            <input type="text" name="instructions"/><br/>
+            
+            <input type="submit" value="Lisää"/>
+        </form>
+        
+            <p><a href="/smoothiet">Smoothielistaukseen</a></p>
+        
+    </body>
+</html>
